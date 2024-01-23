@@ -74,16 +74,7 @@ class ProductosListadoFragment : Fragment() {
             (view?.findViewById<RecyclerView>(R.id.listado)!!.adapter as ProductoRecyclerViewAdapter).notifyDataSetChanged()
 
         })
-        view?.findViewById<FloatingActionButton>(R.id.addfloatingActionButton)?.setOnClickListener {
-            this.viewmodel.newCategoria()
-            val fm: FragmentManager = parentFragmentManager
 
-            fm.commit {
-                replace(R.id.fragmentContainerView, ProductoFragment.newInstance())
-                addToBackStack("nuevaproducto")
-            }
-
-        }
 
 
 

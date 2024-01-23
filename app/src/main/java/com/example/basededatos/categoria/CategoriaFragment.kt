@@ -9,9 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import com.example.basededatos.ApplicationViewModel
 import com.example.basededatos.R
 import com.example.basededatos.databinding.FragmentCategoriaBinding
+import com.example.basededatos.producto.ProductoFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class CategoriaFragment : Fragment() {
@@ -45,6 +48,16 @@ class CategoriaFragment : Fragment() {
             toast.show()
 
 
+
+        }
+        binding.addfloatingActionButton3.setOnClickListener {
+            this.viewmodel.newCategoria()
+            val fm: FragmentManager = parentFragmentManager
+
+            fm.commit {
+                replace(R.id.fragmentContainerView, ProductoFragment.newInstance())
+                addToBackStack("nuevaproducto")
+            }
 
         }
        // view= DataBindingUtil.inflate(inflater,R.layout.fragment_categoria, container, false)

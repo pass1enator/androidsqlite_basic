@@ -40,6 +40,13 @@ class ApplicationViewModel(): ViewModel() {
         //esta vacio
         this._productos.value= arrayListOf()
     }
+    fun newProducto(){
+        //es nuevo, con id a -1
+      /*  this.selected=Categoria();
+        this.selected.value=Categoria();
+        //esta vacio
+        this._productos.value= arrayListOf()*/
+    }
     fun save(){
         //es para insertar
        if(_selected!=null && _selected!!.id==-1){
