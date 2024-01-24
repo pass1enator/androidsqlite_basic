@@ -37,6 +37,7 @@
                     android:id="@+id/categorias_listado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:layout_weight="2" />
 
             </TableRow>
@@ -57,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@={delta.selected.nombre}" />
+                    android:text="@={delta.selectedproducto.nombre}" />
             </TableRow>
 
             <TableRow
@@ -77,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@={delta.selected.descripcion}" />
+                    android:text="@={delta.selectedproducto.descripcion}" />
 
             </TableRow>
 
@@ -97,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:checked="@={delta.selected.activo}" />
+                    android:checked="@={delta.selectedproducto.activo}" />
             </TableRow>
 
             <TableRow

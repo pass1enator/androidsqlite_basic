@@ -65,7 +65,7 @@ class ProductosListadoFragment : Fragment() {
         (view?.findViewById<RecyclerView>(R.id.listado)!!.adapter as ProductoRecyclerViewAdapter).borrar_click =  { position:Int, item: Producto ->
             run {
 
-                //viewmodel.deleteCategoria(item);
+                viewmodel.deleteProducto(item);
             }
         }
         //observar cuando cambian los elementos

@@ -51,7 +51,9 @@ class ApplicationViewModel(): ViewModel() {
         //es para insertar
        if(_selected!=null && _selected!!.id==-1){
            _selected= selected.value!!
-           _selected?.let { this.insertCategoria(it) }
+           _selected?.let { this.insertCategoria(it)
+               this.selected.value=_selected
+           }
        }else{
            //para actualizar
            _selected?.let {
@@ -67,6 +69,30 @@ class ApplicationViewModel(): ViewModel() {
 
            }
        }
+    }
+    fun saveProducto(){
+        //es para insertar
+        if(_selectedproducto!=null && _selectedproducto!!.id==-1){
+            _selectedproducto= selectedproducto.value!!
+            _selectedproducto?.let { this.insertProducto(it)
+                this.selectedproducto.value=_selectedproducto
+            }
+        }else{
+            //para actualizar
+            _selectedproducto?.let {
+                var item= selectedproducto.value
+                if (item != null) {
+                    it.activo=item.activo
+                    it.descripcion=item.descripcion
+                    it.nombre=item.nombre
+                    it.categoria=item.categoria
+                    this.updateProducto(it);
+                    //se avisa de los cambios
+                    this.updatecategorias();
+                }
+
+            }
+        }
 
 
 
@@ -79,24 +105,48 @@ class ApplicationViewModel(): ViewModel() {
         if(this._selected.id!=-1)
             this._productos.value=Producto.loadByCategoria(this._selected,db);
     }
+    fun setSelectedProducto(item:Producto){
+        this._selectedproducto=item;
+        //se hace una copia para evitar que se modifique
+        this.selectedproducto.value=item.copy();
+        }
     fun insertCategoria(c:Categoria){
 
         c.insert(this.db);
         this.categorias.value?.add(c);
         this.updatecategorias()
     }
+
+    fun insertProducto(item:Producto){
+
+        item.insert(this.db);
+        this.productos.value?.add(item);
+        this.updateproductos()
+    }
     fun updateCategoria(c:Categoria){
         c.update(this.db)
     }
-    fun
-
-            deleteCategoria(c:Categoria){
+    fun updateProducto(item:Producto){
+        item.update(this.db)
+    }
+    fun deleteCategoria(c:Categoria){
         c.delete(this.db)
         if(this._selected?.equals(c) == true){
             this._selected= Categoria()
         }
         this._categorias.value?.remove(c);
         this.updatecategorias()
+    }
+
+    fun deleteProducto(item:Producto){
+        item.delete(this.db)
+        if(this._selectedproducto?.equals(item) == true){
+            this._selectedproducto= Producto()
+        }
+        this._productos.value?.remove(item);
+        this._selected.productos?.remove(item);
+        this.updatecategorias()
+        this.updateproductos()
     }
     fun loadAllCategorias(){
         var categorias=Categoria.loadAll(db);
@@ -112,6 +162,11 @@ class ApplicationViewModel(): ViewModel() {
     private fun updatecategorias() {
         var values = this._categorias.value
         this._categorias.value = values
+    }
+
+    private fun updateproductos() {
+        var values = this._productos.value
+        this._productos.value = values
     }
     public fun  close(){
          this.db.close();

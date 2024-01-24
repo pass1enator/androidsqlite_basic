@@ -18,7 +18,8 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:contentDescription="Añadir producto"
-        android:src="@drawable/baseline_add_24"
+        android:enabled="@{(delta.selected.id>-1)?true:false}"
+        android:src="@drawable/baseline_add_box_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -118,13 +119,15 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView2"
+                android:name="com.example.basededatos.producto.ProductosListadoFragment"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:name="com.example.basededatos.producto.ProductosListadoFragment"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

@@ -51,7 +51,7 @@ class CategoriaFragment : Fragment() {
 
         }
         binding.addfloatingActionButton3.setOnClickListener {
-            this.viewmodel.newCategoria()
+            this.viewmodel.newProducto()
             val fm: FragmentManager = parentFragmentManager
 
             fm.commit {

@@ -80,5 +80,8 @@ data class Categoria(var id:Int,var nombre:String,var activo:Boolean,
         return db.delete(Categoria.TABLENAME, selection, selectionArgs);
 
     }
+    override fun toString(): String {
+        return this.id.toString()+":"+this.nombre
+    }
 
 }
