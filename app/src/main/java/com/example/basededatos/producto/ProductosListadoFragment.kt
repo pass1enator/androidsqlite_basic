@@ -28,7 +28,8 @@ class ProductosListadoFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private val  viewmodel: ApplicationViewModel by activityViewModels<ApplicationViewModel>()
     private var view:View?=null;
-
+    var editar_click: ((Int, Producto) -> Unit)? = null
+    var borrar_click: ((Int, Producto) -> Unit)? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,13 +53,15 @@ class ProductosListadoFragment : Fragment() {
         //eventos internos del listado
         (view?.findViewById<RecyclerView>(R.id.listado)!!.adapter as ProductoRecyclerViewAdapter).editar_click =  { position:Int, item: Producto ->
             run {
-               // this.viewmodel.setSelectedCategoria(item)
-                val fm: FragmentManager = parentFragmentManager
-
+                this.viewmodel.setSelectedProducto(item)
+                //se avisa al principal
+                this.editar_click?.let { it(position,item) }
+                /*val fm: FragmentManager = parentFragmentManager
+                var f=fm.fragments
                 fm.commit {
                     replace(R.id.fragmentContainerView, CategoriaFragment.newInstance())
                     addToBackStack("editarcategoria")
-                }
+                }*/
 
             }
         }
@@ -66,6 +69,9 @@ class ProductosListadoFragment : Fragment() {
             run {
 
                 viewmodel.deleteProducto(item);
+                var fm= parentFragmentManager
+
+                    this.borrar_click?.let { it(position,item) }
             }
         }
         //observar cuando cambian los elementos

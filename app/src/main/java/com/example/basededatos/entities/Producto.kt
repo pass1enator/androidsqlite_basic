@@ -10,7 +10,7 @@ data class Producto(var id:Int,var nombre:String, var descripcion:String,
     companion object{
         private var TABLENAME:String="Producto"
         public fun loadAll(db: SQLiteDatabase):ArrayList<Producto>? {
-            val projection = arrayOf("id", "nombre", "activo", "descripcion","precio","categoria")
+            val projection = arrayOf("id", "nombre", "activo", "descripcion","precio","categoriaid")
             var elements = ArrayList<Producto>();
             val cursor = db.query(
                 Producto.TABLENAME,   // The table to query
@@ -87,7 +87,7 @@ data class Producto(var id:Int,var nombre:String, var descripcion:String,
             put("activo",activo)
             put("descripcion",descripcion)
             put("precio",precio)
-            put("categoria", categoria?.id ?:-1 )
+            put("categoriaid", categoria?.id ?:-1 )
         }
 
 

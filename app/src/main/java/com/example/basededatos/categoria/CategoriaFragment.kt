@@ -13,7 +13,9 @@ import androidx.fragment.app.commit
 import com.example.basededatos.ApplicationViewModel
 import com.example.basededatos.R
 import com.example.basededatos.databinding.FragmentCategoriaBinding
+import com.example.basededatos.entities.Producto
 import com.example.basededatos.producto.ProductoFragment
+import com.example.basededatos.producto.ProductosListadoFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -24,7 +26,6 @@ class CategoriaFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -60,9 +61,23 @@ class CategoriaFragment : Fragment() {
             }
 
         }
-       // view= DataBindingUtil.inflate(inflater,R.layout.fragment_categoria, container, false)
-        // Inflate the layout for this fragment
+
         view=binding.root;
+        //se obtiene el fragmentamanager del hijo
+        val fm2: FragmentManager = childFragmentManager
+        //se obtiene  el fragmento contenido y se le pasa la lambda para avisar
+        var f=fm2.fragments.get(0) as ProductosListadoFragment
+        f.editar_click= { position: Int, item: Producto ->
+            run {
+                val fm: FragmentManager = parentFragmentManager
+                fm.commit {
+                    replace(R.id.fragmentContainerView, ProductoFragment.newInstance())
+                    addToBackStack("editarproducto")
+                }
+
+            }
+        }
+
         return view //inflater.inflate(R.layout.fragment_categoria, container, false)
     }
 

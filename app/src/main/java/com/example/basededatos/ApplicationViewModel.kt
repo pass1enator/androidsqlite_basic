@@ -42,10 +42,9 @@ class ApplicationViewModel(): ViewModel() {
     }
     fun newProducto(){
         //es nuevo, con id a -1
-      /*  this.selected=Categoria();
-        this.selected.value=Categoria();
-        //esta vacio
-        this._productos.value= arrayListOf()*/
+        this.selectedproducto.value=Producto();
+        this._selectedproducto=Producto();
+
     }
     fun save(){
         //es para insertar
@@ -144,7 +143,9 @@ class ApplicationViewModel(): ViewModel() {
             this._selectedproducto= Producto()
         }
         this._productos.value?.remove(item);
+        //se borra también de la categoria actual
         this._selected.productos?.remove(item);
+        //se avisa de los cambios
         this.updatecategorias()
         this.updateproductos()
     }
